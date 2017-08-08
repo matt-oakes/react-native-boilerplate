@@ -81,7 +81,7 @@ async function install (context) {
     { template: 'index.js.ejs', target: 'index.android.js' },
     { template: 'ignite.json.ejs', target: 'ignite/ignite.json' },
     { template: 'README.md.ejs', target: 'README.md' },
-    { template: '.gitignore', target: '.gitignore' },
+    { template: 'gitignore', target: '.gitignore' },
     { template: '.babelrc', target: '.babelrc' },
     { template: 'Gemfile', target: 'Gemfile' },
     { template: 'jest-setup.js', target: 'jest-setup.js' },
