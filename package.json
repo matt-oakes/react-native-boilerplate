@@ -1,0 +1,41 @@
+{
+  "name": "matt-oakes-react-native-boilerplate",
+  "description": "Matt Oakes' boilerplate for React Native.",
+  "license": "MIT",
+  "repository": "matt-oakes/react-native-boilerplate",
+  "homepage": "https://github.com/matt-oakes/react-native-boilerplate",
+  "version": "0.0.1",
+  "author": {
+    "name": "Matt Oakes",
+    "email": "hello@mattoakes.net",
+    "url": "https://mattoakes.net"
+  },
+  "scripts": {
+    "lint": "standard",
+    "shipit": "np"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "__DEV__",
+      "jasmine",
+      "beforeAll",
+      "afterAll",
+      "test",
+      "expect",
+      "describe"
+    ]
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "fs-jetpack": "^1.0.0",
+    "jest": "^20.0.4",
+    "np": "^2.15.0",
+    "sinon": "^2.3.1",
+    "standard": "^10.0.2",
+    "tempy": "^0.1.0"
+  },
+  "dependencies": {
+    "ramda": "^0.23.0"
+  }
+}

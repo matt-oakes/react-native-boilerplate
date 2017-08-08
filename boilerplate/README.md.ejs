@@ -1,0 +1,116 @@
+# <%= props.name %>
+
+# Development
+
+## Setup
+
+To install node modules, fastlane (via bundler) and flow types (via flow-types):
+
+```
+yarn
+```
+
+Install iOS certificates using Fastlane Match:
+
+```
+yarn signing
+```
+
+You'll need the Fastlane Match passphrase if this is the first time on this machine.
+
+To get Detox tests running (end to end iOS tests) you'll also need to follow the
+instructions in their getting started guide:
+
+```
+brew tap facebook/fb
+export CODE_SIGNING_REQUIRED=NO && brew install fbsimctl --HEAD
+npm install -g detox-cli
+```
+
+Ensure you have a version of Node installed that supports async/await (7+ I think)
+
+## Commands
+
+Open the ios project in xcode:
+
+```
+yarn xcode
+```
+
+Run the development bundle server:
+
+```
+yarn start
+```
+
+Sometimes there is an issue with the cache leading to modules not resolving, you can clear the cache with:
+
+```
+yarn start -- --reset-cache
+```
+
+Run the storybook server:
+
+```
+yarn storybook
+```
+
+To generate the storyshot test files:
+
+```
+yarn generate-storyshots
+```
+
+Run jest, flow and detox once:
+
+```
+yarn test
+```
+
+Run them individually:
+
+```
+yarn jest
+yarn flow
+yarn detox
+```
+
+You can also run the build and test parts of detox separately:
+
+```
+yarn detox-build
+yarn detox-test
+```
+
+
+Run just fast tests (eg not detox):
+
+```
+yarn test-quick
+```
+
+Run flow, jest and detox watchers:
+
+```
+yarn watch-flow
+yarn watch-flow
+yarn watch-detox
+```
+
+
+Increment version number then build and push to Apple Testflight and Google Play Store Alpha Channel:
+
+```
+yarn release
+```
+
+
+# I18n
+
+Translation files are in `src/i18n/locales` but new ones must be referenced from `src/i18n/index.js`.
+
+To update the translation files with placeholders for missing translations run:
+
+```
+yarn update-locales
+``

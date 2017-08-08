@@ -1,0 +1,92 @@
+{
+  "version": "0.0.1",
+  "scripts": {
+    "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
+    "clean:android": "cd android/ && ./gradlew clean && cd .. && react-native run-android",
+    "newclear": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build && rm -rf node_modules/ && npm cache clean --force && npm i",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "yarn flow && yarn jest && yarn check-locales && yarn check-storybook",
+    "flow": "flow",
+    "jest": "jest",
+    "watch-jest": "jest --watch",
+    "watch-flow": "flow-watch",
+    "watch-detox": "echo 'This assumes you have already run yarn detox-build' && nodemon --watch src --exec 'yarn detox-test'",
+    "xcode": "open ios/bestcoffee.xcodeproj",
+    "signing": "cd ios && bundle exec fastlane signing",
+    "compile-redux-persist-migrate": "cd node_modules/redux-persist-migrate && npm install && npm run build",
+    "prettier": "prettier --write \"src/**/*.js *.js\"",
+    "prettier-storybook": "prettier --write \"storybook/**/*.js\"",
+    "storybook": "storybook start -p 7007",
+    "check-storybook": "scripts/storybook.py check",
+    "update-storybook": "scripts/storybook.py update",
+    "release": "scripts/internal-release.py",
+    "release-ios": "scripts/internal-release.py ios",
+    "release-android": "scripts/internal-release.py android",
+    "check-locales": "scripts/update-i18n-locales.py check",
+    "update-locales": "scripts/update-i18n-locales.py update",
+    "postinstall": "yarn compile-redux-persist-migrate && bundle install && flow-typed install",
+    "precommit": "lint-staged",
+    "prepush": "yarn test"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "babel-plugin-root-import": "^5.1.0",
+    "date-fns": "^1.28.5",
+    "invariant": "^2.2.2",
+    "lodash": "^4.17.2",
+    "nodemon": "^1.11.0",
+    "prettier": "^1.5.2",
+    "prop-types": "^15.5.10",
+    "querystringify": "0.0.4",
+    "ramda": "^0.24.1",
+    "react-native-i18n": "^2.0.2",
+    "react-navigation": "^1.0.0-beta.11",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.1",
+    "redux-persist": "^4.8.2",
+    "redux-persist-migrate": "https://github.com/pacedgroup/redux-persist-migrate.git#737048f324c4deaf0ea02fa097360d05ee3eb8a9",
+    "redux-persist-transform-filter": "^0.0.15",
+    "redux-saga": "^0.15.4",
+    "redux-saga-tester": "^1.0.298",
+    "remote-redux-devtools": "^0.5.12",
+    "reselect": "^3.0.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-storyshots": "^3.1.8",
+    "@storybook/react-native": "^3.1.8",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "2.0.0",
+    "enzyme": "^2.6.0",
+    "fetch-mock": "^5.12.1",
+    "flow-bin": "^0.49.1",
+    "flow-typed": "^2.1.2",
+    "flow-watch": "^1.1.1",
+    "husky": "^0.14.3",
+    "jest": "20.0.4",
+    "lint-staged": "^4.0.1",
+    "node-fetch-polyfill": "^2.0.6",
+    "react-dom": "~15.4.1",
+    "react-test-renderer": "16.0.0-alpha.12",
+    "timekeeper": "^1.0.0"
+  },
+  "jest": {
+    "preset": "react-native",
+    "setupFiles": [
+      "<rootDir>/jest-setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "e2e",
+      "node_modules"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-navigation)"
+    ]
+  },
+  "config": {}
+}

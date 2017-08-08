@@ -1,0 +1,1 @@
+This is where you would place the data models and fshared flow types for the app.

@@ -1,0 +1,70 @@
+# osx
+#
+.ds_store
+
+# xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+deriveddata
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+ios/bestcoffee.app.dSYM.zip
+
+# android/intellij
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+
+# VSCode
+#
+.vscode/
+jsconfig.json
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# buck
+buck-out/
+\.buckd/
+*.keystore
+
+# fastlane
+#
+# it is recommended to not store the screenshots in the git repo. instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# for more information about the recommended setup visit:
+# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/gitignore.md
+
+android/fastlane/report.xml
+android/fastlane/preview.html
+android/fastlane/screenshots
+android/app/build
+
+ios/detox-build
+
+ios/fastlane/report.xml
+ios/fastlane/preview.html
+ios/fastlane/screenshots
+
+playstore-credentials.json
+
+flow-typed/npm
