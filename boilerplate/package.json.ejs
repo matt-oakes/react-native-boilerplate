@@ -11,7 +11,7 @@
     "watch-jest": "jest --watch",
     "watch-flow": "flow-watch",
     "watch-detox": "echo 'This assumes you have already run yarn detox-build' && nodemon --watch src --exec 'yarn detox-test'",
-    "xcode": "open ios/bestcoffee.xcodeproj",
+    "xcode": "open ios/<%= props.name %>.xcodeproj",
     "signing": "cd ios && bundle exec fastlane signing",
     "compile-redux-persist-migrate": "cd node_modules/redux-persist-migrate && npm install && npm run build",
     "prettier": "prettier --write \"src/**/*.js *.js\"",
