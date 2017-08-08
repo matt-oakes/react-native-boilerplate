@@ -1,7 +1,7 @@
 {
   "name": "ignite-matt-oakes-react-native-boilerplate",
   "description": "Matt Oakes' boilerplate for React Native.",
-  "license": "MIT",
+  "license": "Apache 2.0",
   "repository": "matt-oakes/react-native-boilerplate",
   "homepage": "https://github.com/matt-oakes/react-native-boilerplate",
   "version": "1.0.1",
