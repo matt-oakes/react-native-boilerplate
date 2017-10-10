@@ -26,12 +26,11 @@ const composeEnhansers = composeWithDevTools({
   hostname: "localhost",
   port: 8000
 });
-const store: StoreType = persistStore(
+const store: StoreType = createStore(
   appReducer,
-  {
-    enhancer: () => composeEnhansers(applyMiddleware(createSagaMiddleware()))
-  }
+  composeEnhansers(applyMiddleware(createSagaMiddleware()))
 );
+export const persistor = persistStore(store)
 
 // Start the root saga running which starts all the others
 sagaMiddleware.run(RootSaga);

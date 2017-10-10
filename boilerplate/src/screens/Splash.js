@@ -5,17 +5,13 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Theme from "~/src/theme";
 
-export function WelcomeScreen() {
+export function SplashScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome!</Text>
+      <Text style={styles.text}>Splash!</Text>
     </View>
   );
 }
-
-WelcomeScreen.navigationOptions = {
-  title: "Welcome"
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -30,4 +26,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default WelcomeScreen;
+export default SplashScreen;

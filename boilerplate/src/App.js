@@ -3,14 +3,21 @@ import "./i18n"; // Imported for the side effects
 
 import React from "react";
 import { Provider } from "react-redux";
+import { PersistGate } from 'redux-persist/es/integration/react'
 
-import Store from "./redux";
+import store, { persistor } from "./redux";
 import RootScreen from "./screens/Root";
+import SplashScreen from "./screens/Splash";
 
 export default function Root(): React.Element<*> {
   return (
-    <Provider store={Store}>
-      <RootScreen />
+    <Provider store={store}>
+      <PersistGate
+        loading={<SplashScreen />}
+        persistor={persistor}
+      >
+        <RootScreen />
+      </PersistGate>
     </Provider>
   );
 }
