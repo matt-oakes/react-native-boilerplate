@@ -85,7 +85,8 @@ async function install (context) {
     { template: '.babelrc', target: '.babelrc' },
     { template: 'Gemfile', target: 'Gemfile' },
     { template: 'jest-setup.js', target: 'jest-setup.js' },
-    { template: '.flowconfig', target: '.flowconfig' }
+    { template: '.flowconfig', target: '.flowconfig' },
+    { template: 'storybook/storybook.js.ejs', target: 'storybook/storybook.js' }
   ]
   const templateProps = {
     name,
