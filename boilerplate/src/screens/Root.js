@@ -6,7 +6,7 @@ import type { Connector } from "react-redux";
 import { addNavigationHelpers } from "react-navigation";
 import type { NavigationState } from "react-navigation";
 
-import Navigator from "~/src/navigation/rootModalStack";
+import Navigator from "~/src/navigation/rootNavigationStack";
 import type { DispatchType, StateType } from "~/src/redux/types";
 import { NavigationSelectors } from "~/src/redux/navigation";
 
