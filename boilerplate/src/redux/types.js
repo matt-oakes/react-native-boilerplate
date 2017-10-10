@@ -3,9 +3,9 @@
 import type { Store as ReduxStore, Dispatch as ReduxDispatch } from "redux";
 
 import NavigationTypes from "./navigation/types";
-import type { NavigationActionType, NavigationStateType } from "./navigation/types";
+import type { NavigationStateType } from "./navigation/types";
 import NetworkTypes from "./network/types";
-import type { NetworkStateType } from "./network/types";
+import type { NetworkActionType, NetworkStateType } from "./network/types";
 import UITypes from "./ui/types";
 import type { UIActionType, UIStateType } from "./ui/types";
 
@@ -21,7 +21,7 @@ export const Actions = {
 export type ActionNameType = $Keys<typeof Actions>;
 
 export type ActionType =
-  | NavigationActionType
+  | NetworkActionType
   | UIActionType
   | { type: "noop" };
 

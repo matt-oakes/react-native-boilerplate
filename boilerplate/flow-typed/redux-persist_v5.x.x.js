@@ -1,14 +1,14 @@
 // flow-typed signature: 28fda6532ec4d699152b118dffdd19ec
-// flow-typed version: <<STUB>>/redux-persist_v5.0.0/flow_v0.49.1
+// flow-typed version: <<STUB>>/redux-persist_v5.0.0/flow_v0.56.0
 
 type PersistState = {
   version: number,
   rehydrated: boolean,
 }
 
-type PersistedState = {
-  _persist: PersistState,
-} | void
+type PersistPartial = { _persist: PersistState }
+
+type PersistedState = PersistPartial | void
 
 type PersistConfig = {
   version?: number,
@@ -43,6 +43,11 @@ type Transform = {
   in: (Object, string) => Object,
   out: (Object, string) => Object,
   config?: PersistConfig,
+}
+
+type TransformConfig = {
+  whitelist?: Array<string>,
+  blacklist?: Array<string>,
 }
 
 type RehydrateErrorType = any
@@ -91,7 +96,7 @@ declare module 'redux-persist' {
   declare function getStoredState(config: PersistConfig
   ): Promise<Object | void>
   declare function persistReducer<State: Object, Action: Object>(config: PersistConfig, baseReducer: (State, Action) => State): (State, Action) => State & PersistPartial
-  declare function persistStore(store: Object, options?: PersistorOptions, cb?: BoostrappedCb): Persistor
+  declare function persistStore(store: Object, options?: PersistorOptions, cb?: () => any): Persistor
   declare function purgeStoredState(config: PersistConfig): any
 }
 

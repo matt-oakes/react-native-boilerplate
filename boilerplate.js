@@ -77,8 +77,7 @@ async function install (context) {
   // generate some templates
   spinner.text = '▸ generating files'
   const templates = [
-    { template: 'index.js.ejs', target: 'index.ios.js' },
-    { template: 'index.js.ejs', target: 'index.android.js' },
+    { template: 'index.js.ejs', target: 'index.js' },
     { template: 'ignite.json.ejs', target: 'ignite/ignite.json' },
     { template: 'README.md.ejs', target: 'README.md' },
     { template: 'gitignore', target: '.gitignore' },
@@ -137,12 +136,6 @@ async function install (context) {
 
   spinner.stop()
 
-  // react native link -- must use spawn & stdio: ignore or it hangs!! :(
-  spinner.text = `▸ linking native libraries`
-  spinner.start()
-  await system.spawn('react-native link', { stdio: 'ignore' })
-  spinner.stop()
-
   // git configuration
   const gitExists = await filesystem.exists('./.git')
   if (!gitExists && !parameters.options['skip-git'] && system.which('git')) {
@@ -165,7 +158,7 @@ async function install (context) {
 
     To get started:
 
-      cd ${name}
+      react-native link
       react-native run-ios
       react-native run-android${androidInfo}
       ignite --help

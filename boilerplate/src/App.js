@@ -9,7 +9,7 @@ import store, { persistor } from "./redux";
 import RootScreen from "./screens/Root";
 import SplashScreen from "./screens/Splash";
 
-export default function Root(): React.Element<*> {
+export default function Root(): * {
   return (
     <Provider store={store}>
       <PersistGate

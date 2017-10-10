@@ -29,7 +29,7 @@ export type Props = {
 };
 
 export const createButton = (defaultProps?: Object) => {
-  return function Button(props: Props): React.Element<*> {
+  return function Button(props: Props): * {
     const combinedProps = {
       ...defaultProps,
       ...props
