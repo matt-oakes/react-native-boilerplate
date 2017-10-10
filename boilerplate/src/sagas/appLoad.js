@@ -2,7 +2,7 @@
 
 import { takeEvery } from "redux-saga";
 import { put } from "redux-saga/effects";
-import { REHYDRATE } from "redux-persist/constants";
+import { REHYDRATE } from "redux-persist/lib/constants";
 
 import { UIActions } from "../redux/ui";
 import { Actions } from "../redux/types";

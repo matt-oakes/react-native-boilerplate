@@ -8,7 +8,7 @@ export const RequestKey = {
   REPLACE_ME: "replaceMe"
 };
 // Why doesn't Flow let us define this type from the enum above...
-export type RequestKeyType = "";
+export type RequestKeyType = "replaceMe";
 
 // This maps the request keys to the actions which trigger the state changes
 export const RequestKeyActionMap: RequestKeyActionMapType = {

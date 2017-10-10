@@ -14,9 +14,10 @@
 .*/Libraries/react-native/React.js
 .*/Libraries/react-native/ReactNative.js
 
-; Ignore react-navigation errors
+; Ignore module errors
+.*/node_modules/radium/.*
 .*/node_modules/react-navigation/.*
-.*/node_modules/react-native-tab-view/.*
+.*/node_modules/redux-persist/.*
 
 ; https://github.com/facebook/react-native/issues/14927
 .*/node_modules/react-native/local-cli/link/link.js
