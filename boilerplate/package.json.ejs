@@ -13,7 +13,6 @@
     "watch-detox": "echo 'This assumes you have already run yarn detox-build' && nodemon --watch src --exec 'yarn detox-test'",
     "xcode": "open ios/<%= props.name %>.xcodeproj",
     "signing": "cd ios && bundle exec fastlane signing",
-    "compile-redux-persist-migrate": "cd node_modules/redux-persist-migrate && npm install && npm run build",
     "prettier": "prettier --write \"src/**/*.js *.js\"",
     "prettier-storybook": "prettier --write \"storybook/**/*.js\"",
     "storybook": "storybook start -p 7007",
@@ -25,7 +24,7 @@
     "check-locales": "scripts/update-i18n-locales.py check",
     "update-locales": "scripts/update-i18n-locales.py update",
     "inject-devtools": "remotedev --hostname=localhost --port=8000 --injectserver=reactnative",
-    "postinstall": "yarn inject-devtools && yarn compile-redux-persist-migrate && bundle install && flow-typed install",
+    "postinstall": "yarn inject-devtools && bundle install && flow-typed install",
     "precommit": "lint-staged",
     "prepush": "yarn test"
   },
