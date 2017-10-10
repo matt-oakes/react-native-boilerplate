@@ -3,15 +3,13 @@
 import _ from "lodash";
 import { NavigationActions } from "react-navigation";
 
-import { Actions as NetworkActions, RequestKey } from "./types";
-import type {
-  RequestKeyType,
-  NetworkStateType,
-  RequestHashKeyType
-} from "./types";
+import { RequestKey, RequestKeyActionMap } from "./config";
+import type { RequestKeyType } from "./config";
+import { Actions as NetworkActions } from "./types";
+import type { NetworkStateType, RequestHashKeyType } from "./types";
 import { createRequestHashKey } from "./utils";
 import { Actions } from "../types";
-import type { ActionType, ActionNameType } from "../types";
+import type { ActionType } from "../types";
 import { APIError } from "~/src/models/apiError";
 
 export const initialState: NetworkStateType = {
@@ -19,23 +17,9 @@ export const initialState: NetworkStateType = {
   errors: {}
 };
 
-type ActionsMapType = {|
-  requestIdKey?: string, // This key path is used to differentiate between different requests of the same type
-  request?: ActionNameType,
-  cancelled?: ActionNameType,
-  failed?: ActionNameType, // This action must have an "error" property
-  complete?: ActionNameType
-|};
-type RequestKeyActionMapType = {
-  [requestKey: RequestKeyType]: ActionsMapType
-};
-
-// This maps the request keys to the actions which trigger the state changes
-export const RequestKeyActionMap: RequestKeyActionMapType = {};
-
 // We transform the above map into 4 other maps which are easier to work with in the reducer
 // This is done because the above map is easier for the developer to set up
-type ActionRequestKeyMapType = { [actionType: ActionNameType]: RequestKeyType };
+type ActionRequestKeyMapType = { [actionType: string]: RequestKeyType };
 // The actions which will set the loading property
 export const SetsLoadingActions: ActionRequestKeyMapType = {};
 // The actions which will clear the loading property
@@ -94,7 +78,6 @@ export default function reducer(
   }
 
   // Set the loading key if the action is in the map
-  // $FlowExpectedError Flow isn't happy that we're checking for null
   const setsLoadingRequestKey = SetsLoadingActions[action.type];
   if (setsLoadingRequestKey) {
     const requestHashKey = getRequestHashKey(setsLoadingRequestKey, action);
@@ -108,7 +91,6 @@ export default function reducer(
   }
 
   // Clear the loading key if the action is in the map
-  // $FlowExpectedError Flow isn't happy that we're checking for null
   const clearsLoadingRequestKey = ClearsLoadingActions[action.type];
   if (clearsLoadingRequestKey) {
     const requestHashKey = getRequestHashKey(clearsLoadingRequestKey, action);
@@ -119,7 +101,6 @@ export default function reducer(
   }
 
   // Set the error key if the action is in the map
-  // $FlowExpectedError Flow isn't happy that we're checking for null
   const setsErrorRequestKey = SetsErrorActions[action.type];
   if (setsErrorRequestKey) {
     const requestHashKey = getRequestHashKey(setsErrorRequestKey, action);
@@ -134,7 +115,6 @@ export default function reducer(
   }
 
   // Clear the error key if the action is in the map
-  // $FlowExpectedError Flow isn't happy that we're checking for null
   const clearsErrorRequestKey = ClearsErrorActions[action.type];
   if (clearsErrorRequestKey) {
     const requestHashKey = getRequestHashKey(clearsErrorRequestKey, action);

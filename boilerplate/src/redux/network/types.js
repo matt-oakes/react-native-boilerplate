@@ -1,18 +1,25 @@
 // @flow
 
+import type { RequestKeyType } from "./config";
 import { APIError } from "~/src/models/apiError";
 
 /**
-* Request keys
-**/
-
-export const RequestKey = {
-  EXAMPLE: "example"
-};
-// Why doesn't Flow let us define this type from the enum above...
-export type RequestKeyType = "example";
+ * Config types
+ **/
 
 export type RequestIdType = string;
+
+// TODO: These should have the action names as a type
+export type ActionsMapType = {|
+  requestIdKey?: string, // This key path is used to differentiate between different requests of the same type
+  request?: string,
+  cancelled?: string,
+  failed?: string, // This action must have an "error" property
+  complete?: string
+|};
+export type RequestKeyActionMapType = {
+  [requestKey: RequestKeyType]: ActionsMapType
+};
 
 /**
  * Redux store state types
@@ -48,6 +55,5 @@ export type NetworkActionType = {|
  **/
 
 export default {
-  Actions,
-  RequestKey
+  Actions
 };

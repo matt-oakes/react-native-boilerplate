@@ -1,10 +1,7 @@
 // @flow
 
-import type {
-  RequestKeyType,
-  RequestIdType,
-  RequestHashKeyType
-} from "./types";
+import type { RequestKeyType } from "./config";
+import type { RequestIdType, RequestHashKeyType } from "./types";
 
 export function createRequestHashKey(
   requestKey: RequestKeyType,

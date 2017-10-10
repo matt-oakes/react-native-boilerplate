@@ -3,23 +3,16 @@
 
 import _ from "lodash";
 
+import { RequestKey, RequestKeyActionMap } from "../config";
 import NetworkSelectors from "../selectors";
-import {
-  initialState as networkInitialState,
-  RequestKeyActionMap
-} from "../reducers";
-import { RequestKey } from "../types";
+import { initialState as networkInitialState } from "../reducers";
 import type { NetworkStateType } from "../types";
 import { createRequestHashKey } from "../utils";
 import { initialState } from "~/src/redux";
 import { APIError } from "~/src/models/apiError";
 
+// TODO: Reenable these once you are making network requests
 describe.skip("Network selectors", () => {
-  it("should pass", () => {
-    // TODO: Remove this once there is a network request to test
-    // This is only here because jest does not allow black test suites
-  });
-
   _.each(RequestKeyActionMap, (actions, requestKey) => {
     const requestId = actions.requestIdKey ? "123" : "";
     const requestHashKey = createRequestHashKey(requestKey, requestId);
@@ -38,7 +31,7 @@ describe.skip("Network selectors", () => {
         };
 
         expect(
-          NetworkSelectors.isLoading(requestKey, requestId)(state)
+          NetworkSelectors.isLoading(state)(requestKey, requestId)
         ).toEqual(true);
       });
 
@@ -53,7 +46,7 @@ describe.skip("Network selectors", () => {
         };
 
         expect(
-          NetworkSelectors.isLoading(requestKey, requestId)(state)
+          NetworkSelectors.isLoading(state)(requestKey, requestId)
         ).toEqual(false);
       });
     });
@@ -73,7 +66,7 @@ describe.skip("Network selectors", () => {
           network: networkState
         };
 
-        expect(NetworkSelectors.getError(requestKey, requestId)(state)).toEqual(
+        expect(NetworkSelectors.getError(state)(requestKey, requestId)).toEqual(
           expectedError
         );
       });
@@ -88,7 +81,7 @@ describe.skip("Network selectors", () => {
           network: networkState
         };
 
-        expect(NetworkSelectors.getError(requestKey, requestId)(state)).toEqual(
+        expect(NetworkSelectors.getError(state)(requestKey, requestId)).toEqual(
           null
         );
       });
@@ -110,7 +103,7 @@ describe.skip("Network selectors", () => {
         };
 
         expect(
-          NetworkSelectors.getErrorTitle(requestKey, requestId)(state)
+          NetworkSelectors.getErrorTitle(state)(requestKey, requestId)
           // $FlowExpectedError Flow cannot see inside the APIError object
         ).toEqual(expectedError.title);
       });
@@ -126,7 +119,7 @@ describe.skip("Network selectors", () => {
         };
 
         expect(
-          NetworkSelectors.getErrorTitle(requestKey, requestId)(state)
+          NetworkSelectors.getErrorTitle(state)(requestKey, requestId)
         ).toEqual(null);
       });
     });

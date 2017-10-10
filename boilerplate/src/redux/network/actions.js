@@ -1,7 +1,8 @@
 // @flow
 
+import type { RequestKeyType } from "./config";
 import { Actions } from "./types";
-import type { NetworkActionType, RequestKeyType, RequestIdType } from "./types";
+import type { NetworkActionType, RequestIdType } from "./types";
 
 export function clearError(
   requestKey: RequestKeyType,
