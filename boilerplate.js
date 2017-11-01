@@ -1,21 +1,6 @@
 const { merge, pipe, assoc, omit, __ } = require('ramda')
 const { getReactNativeVersion } = require('./lib/react-native-version')
-
-/**
- * Is Android installed?
- *
- * $ANDROID_HOME/tools folder has to exist.
- *
- * @param {*} context - The gluegun context.
- * @returns {boolean}
- */
-const isAndroidInstalled = function (context) {
-  const androidHome = process.env['ANDROID_HOME']
-  const hasAndroidEnv = !context.strings.isBlank(androidHome)
-  const hasAndroid = hasAndroidEnv && context.filesystem.exists(`${androidHome}/tools`) === 'dir'
-
-  return Boolean(hasAndroid)
-}
+const AndroidSigning = require('./lib/android-signing')
 
 /**
  * Let's install.
@@ -34,7 +19,9 @@ async function install (context) {
     template
   } = context
   const { colors } = print
-  const { red, yellow, bold, gray, blue } = colors
+  const { red, yellow, bold, gray } = colors
+
+  const { androidPassphrase } = await prompt.ask({ type: 'password', name: 'androidPassphrase', message: 'What is the Android signing passphrase you want to use (min 6 characters)?' })
 
   const perfStart = (new Date()).getTime()
 
@@ -135,6 +122,14 @@ async function install (context) {
   }
   await mergePackageJsons()
 
+  // Setup Android signing
+  spinner.text = 'setting up Android signing'
+  const currentGradleContent = await filesystem.read(AndroidSigning.buildGradlePath)
+  const newGradleContent = currentGradleContent.replace(AndroidSigning.searchConfig, AndroidSigning.replacementConfig)
+  await filesystem.write(AndroidSigning.buildGradlePath, newGradleContent)
+  await filesystem.dir(AndroidSigning.keystorePath, { empty: true })
+  await system.run(AndroidSigning.generateKeystoreCommand('debug', 'android', 'android'))
+  await system.run(AndroidSigning.generateKeystoreCommand('release', 'release', androidPassphrase))
   spinner.stop()
 
   // git configuration
