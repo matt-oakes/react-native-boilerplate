@@ -151,20 +151,16 @@ async function install (context) {
   const perfDuration = parseInt(((new Date()).getTime() - perfStart) / 10) / 100
   spinner.succeed(`ignited ${yellow(name)} in ${perfDuration}s`)
 
-  const androidInfo = isAndroidInstalled(context) ? ''
-    : `\n\nTo run in Android, make sure you've followed the latest react-native setup instructions at https://facebook.github.io/react-native/docs/getting-started.html before using ignite.\nYou won't be able to run ${bold('react-native run-android')} successfully until you have.`
-
   const successMessage = `
     ${red('Ignite CLI')} ignited ${yellow(name)} in ${gray(`${perfDuration}s`)}
 
-    To get started:
+    Next steps:
 
-      react-native link
-      react-native run-ios
-      react-native run-android${androidInfo}
-      ignite --help
-
-    ${bold('Now get cooking! 🍽')}
+      ☐ Run: react-native link
+      ☐ Setup Fastlane and Match for iOS
+      ☐ Setup Android signing
+      ☐ Setup Fastlane for Android
+      ☐ ${bold('Get coding!')}
   `
 
   print.info(successMessage)
