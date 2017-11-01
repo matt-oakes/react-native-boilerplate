@@ -21,7 +21,7 @@ package = json.load(open(package_file, "r", encoding="utf8"), object_pairs_hook=
 
 def error(message):
     print("ERROR: " + message)
-    subprocess.check_call("""osascript -e 'display notification "%s" with title "Best Coffee Build"'""" % (message,), shell=True)
+    subprocess.check_call("""osascript -e 'display notification "%s" with title "<%= props.name %> Build"'""" % (message,), shell=True)
 
 def pre_check():
     has_error = False
@@ -56,8 +56,8 @@ def bump_version():
     # IOS
     subprocess.check_call("""cd ios && agvtool new-marketing-version %s""" % (ios_version,), shell=True)
     subprocess.check_call("""cd ios && agvtool new-version %s""" % (build,), shell=True)
-    subprocess.check_call("""/usr/libexec/PlistBuddy -c "Set :CFBundleVersion %s" ios/bestcoffee/Info.plist""" % (build,), shell=True)
-    subprocess.check_call("""/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString %s" ios/bestcoffee/Info.plist""" % (ios_version,), shell=True)
+    subprocess.check_call("""/usr/libexec/PlistBuddy -c "Set :CFBundleVersion %s" ios/<%= props.name %>/Info.plist""" % (build,), shell=True)
+    subprocess.check_call("""/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString %s" ios/<%= props.name %>/Info.plist""" % (ios_version,), shell=True)
 
     # Android
     gradle_build = open("android/app/build.gradle", "r", encoding="utf8").read()
@@ -66,10 +66,6 @@ def bump_version():
     open("android/app/build.gradle", "w", encoding="utf8").write(gradle_build)
 
     return version
-
-def slack_notify(message):
-    webhook_url = "https://hooks.slack.com/services/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"
-    subprocess.check_call("""curl -X POST -H 'Content-type: application/json' --data '{"text":"%s"}' %s""" % (message, webhook_url, ), shell=True)
 
 def run_tests():
     subprocess.check_call("yarn test", shell=True)
@@ -94,8 +90,6 @@ try:
     print("-> Bump version")
     new_version = bump_version()
     new_version_string = str(new_version[0]) + "." + str(new_version[1]) + "." + str(new_version[2])
-    print("-> Alert Slack users")
-    slack_notify("Starting release of v" + new_version_string)
 
     if android:
         print("-> Build android")
@@ -108,8 +102,7 @@ try:
     print("-> Tag")
     tag()
     print("ALL DONE")
-    subprocess.check_call("""osascript -e 'display notification "Release complete" with title "Best Coffee Build"'""", shell=True)
-    slack_notify("v" + new_version_string + " released!")
+    subprocess.check_call("""osascript -e 'display notification "Release complete" with title "<%= props.name %> Build"'""", shell=True)
 except Exception as e:
     error("Build process failed")
     raise

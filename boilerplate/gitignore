@@ -60,6 +60,7 @@ android/fastlane/screenshots
 android/app/build
 
 ios/detox-build
+ios/*.dSYM.*
 
 ios/fastlane/report.xml
 ios/fastlane/preview.html
