@@ -18,17 +18,6 @@ yarn signing
 
 You'll need the Fastlane Match passphrase if this is the first time on this machine.
 
-To get Detox tests running (end to end iOS tests) you'll also need to follow the
-instructions in their getting started guide:
-
-```
-brew tap facebook/fb
-export CODE_SIGNING_REQUIRED=NO && brew install fbsimctl --HEAD
-npm install -g detox-cli
-```
-
-Ensure you have a version of Node installed that supports async/await (7+ I think)
-
 ## Commands
 
 Open the ios project in xcode:
@@ -61,7 +50,7 @@ To generate the storyshot test files:
 yarn generate-storyshots
 ```
 
-Run jest, flow and detox once:
+Run all tests once:
 
 ```
 yarn test
@@ -72,38 +61,20 @@ Run them individually:
 ```
 yarn jest
 yarn flow
-yarn detox
 ```
 
-You can also run the build and test parts of detox separately:
-
-```
-yarn detox-build
-yarn detox-test
-```
-
-
-Run just fast tests (eg not detox):
-
-```
-yarn test-quick
-```
-
-Run flow, jest and detox watchers:
+Run test watchers:
 
 ```
 yarn watch-flow
 yarn watch-flow
-yarn watch-detox
 ```
-
 
 Increment version number then build and push to Apple Testflight and Google Play Store Alpha Channel:
 
 ```
 yarn release
 ```
-
 
 # I18n
 
