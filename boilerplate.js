@@ -147,6 +147,11 @@ async function install (context) {
   }
   spinner.succeed()
 
+  // react native link -- must use spawn & stdio: ignore or it hangs!! :(
+  spinner = print.spin(`linking native libraries`)
+  await system.spawn('react-native link', { stdio: 'ignore' })
+  spinner.succeed()
+
   // Setup Android signing
   const { androidPassphrase } = await prompt.ask({ type: 'password', name: 'androidPassphrase', message: 'What is the Android signing passphrase you want to use (min 6 characters)?' })
   spinner = print.spin('setting up Android signing')
@@ -165,11 +170,6 @@ async function install (context) {
   ])
   spinner = print.spin('setting the bundle id and display name')
   await system.run(`yarn update-bundle-id "${bundleId}" "${displayName}"`)
-  spinner.succeed()
-
-  // react native link -- must use spawn & stdio: ignore or it hangs!! :(
-  spinner = print.spin(`linking native libraries`)
-  await system.spawn('react-native link', { stdio: 'ignore' })
   spinner.succeed()
 
   spinner = print.spin(`running tests`)
