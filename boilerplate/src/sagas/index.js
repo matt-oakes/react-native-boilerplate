@@ -1,13 +1,10 @@
 // @flow
 
-// We're using an older types file for flow without all
-import { all } from "redux-saga/effects";
+import { all, call } from "redux-saga/effects";
 
-import AppLoadSaga from "./appLoad";
+import appLoadSaga from "./appLoad";
 
 // Single entry point to start all Sagas
-export default function* RootSaga(): Generator<*, *, *> {
-  yield all([
-    AppLoadSaga()
-  ]);
+export default function* rootSaga(): Generator<*, *, *> {
+  yield all([call(appLoadSaga)]);
 }

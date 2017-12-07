@@ -1,0 +1,35 @@
+// @flow
+
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { connect } from "react-redux";
+import type { Connector } from "react-redux";
+
+import type { DispatchType, StateType } from "~/src/redux/types";
+
+export type Props = {};
+
+export function <%= props.name %>Screen(props: Props) {
+  return <View style={styles.container} />;
+}
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16
+  }
+});
+
+const mapStateToProps = (state: StateType) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch: DispatchType) => {
+  return {};
+};
+
+const connector: Connector<{}, Props> = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+export default connector(<%= props.name %>Screen);

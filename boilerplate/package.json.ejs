@@ -23,6 +23,7 @@
     "release-android": "scripts/internal-release.py android",
     "check-locales": "scripts/update-i18n-locales.py check",
     "update-locales": "scripts/update-i18n-locales.py update",
+    "update-bundle-id": "react-native-ci-tools bundle -ia",
     "inject-devtools": "remotedev --hostname=localhost --port=8000 --injectserver=reactnative",
     "postinstall": "yarn inject-devtools && bundle install && flow-typed install",
     "precommit": "lint-staged",

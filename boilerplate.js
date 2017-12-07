@@ -21,16 +21,15 @@ async function install (context) {
   const { colors } = print
   const { red, yellow, bold, gray } = colors
 
-  const { androidPassphrase } = await prompt.ask({ type: 'password', name: 'androidPassphrase', message: 'What is the Android signing passphrase you want to use (min 6 characters)?' })
-
   const perfStart = (new Date()).getTime()
 
   const name = parameters.third
-  const spinner = print
+  let spinner = print
     .spin(`using Matt Oakes's React Native boilerplate`)
     .succeed()
 
   // attempt to install React Native or die trying
+  spinner = print.spin('installing react native')
   const rnInstall = await reactNative.install({
     name,
     version: getReactNativeVersion(context)
@@ -39,10 +38,14 @@ async function install (context) {
 
   // remove the __tests__ directory that come with React Native
   filesystem.remove('__tests__')
+  spinner.succeed()
 
   // copy our App & Tests directories
-  spinner.text = '▸ copying files'
-  spinner.start()
+  spinner = print.spin('copying files')
+  filesystem.copy(`${__dirname}/boilerplate/.vscode`, `${process.cwd()}/.vscode`, {
+    overwrite: true,
+    matching: '!*.ejs'
+  })
   filesystem.copy(`${__dirname}/boilerplate/flow-typed`, `${process.cwd()}/flow-typed`, {
     overwrite: true,
     matching: '!*.ejs'
@@ -59,10 +62,10 @@ async function install (context) {
     overwrite: true,
     matching: '!*.ejs'
   })
-  spinner.stop()
+  spinner.succeed()
 
   // generate some templates
-  spinner.text = '▸ generating files'
+  spinner = print.spin('generating files')
   const templates = [
     { template: 'index.js.ejs', target: 'index.js' },
     { template: 'ignite.json.ejs', target: 'ignite/ignite.json' },
@@ -81,13 +84,15 @@ async function install (context) {
     reactNativeVersion: rnInstall.version
   }
   await ignite.copyBatch(context, templates, templateProps, {
-    quiet: true,
+    quiet: !parameters.options.debug,
     directory: `${ignite.ignitePluginPath()}/boilerplate`
   })
+  spinner.succeed()
 
   /**
    * Merge the package.json from our template into the one provided from react-native init.
    */
+  spinner = print.spin('merging package.json')
   async function mergePackageJsons () {
     // transform our package.json in case we need to replace variables
     const rawJson = await template.generate({
@@ -121,44 +126,82 @@ async function install (context) {
     filesystem.write('package.json', newPackage, { jsonIndent: 2 })
   }
   await mergePackageJsons()
+  spinner.succeed()
+
+  spinner = print.spin('running yarn install')
+  await system.run('yarn install')
+  spinner.succeed()
+
+  spinner = print.spin('adding ignite boilerplate')
+  try {
+    // boilerplate adds itself to get plugin.js/generators etc
+    // Could be directory, npm@version, or just npm name.  Default to passed in values
+    // pass along the debug flag if we're running in that mode
+    const debugFlag = parameters.options.debug ? '--debug' : ''
+    const boilerplate = parameters.options.b || parameters.options.boilerplate || 'ignite-matt-oakes-react-native-boilerplate'
+
+    await system.spawn(`ignite add ${boilerplate} ${debugFlag}`, { stdio: 'inherit' })
+  } catch (e) {
+    ignite.log(e)
+    throw e
+  }
+  spinner.succeed()
 
   // Setup Android signing
-  spinner.text = 'setting up Android signing'
+  const { androidPassphrase } = await prompt.ask({ type: 'password', name: 'androidPassphrase', message: 'What is the Android signing passphrase you want to use (min 6 characters)?' })
+  spinner = print.spin('setting up Android signing')
   const currentGradleContent = await filesystem.read(AndroidSigning.buildGradlePath)
   const newGradleContent = currentGradleContent.replace(AndroidSigning.searchConfig, AndroidSigning.replacementConfig)
   await filesystem.write(AndroidSigning.buildGradlePath, newGradleContent)
   await filesystem.dir(AndroidSigning.keystorePath, { empty: true })
   await system.run(AndroidSigning.generateKeystoreCommand('debug', 'android', 'android'))
   await system.run(AndroidSigning.generateKeystoreCommand('release', 'release', androidPassphrase))
-  spinner.stop()
+  spinner.succeed()
+
+  // Set the bundle id and app name correctly
+  const { bundleId, displayName } = await prompt.ask([
+    { type: 'input', name: 'bundleId', message: 'What bundle identifier do you want to use (eg. net.mattoakes.app.example)?' },
+    { type: 'input', name: 'displayName', message: 'What is the apps display name (eg. Example App)?' }
+  ])
+  spinner = print.spin('setting the bundle id and display name')
+  await system.run(`yarn update-bundle-id "${bundleId}" "${displayName}"`)
+  spinner.succeed()
+
+  // react native link -- must use spawn & stdio: ignore or it hangs!! :(
+  spinner = print.spin(`linking native libraries`)
+  await system.spawn('react-native link', { stdio: 'ignore' })
+  spinner.succeed()
+
+  spinner = print.spin(`running tests`)
+  await system.run('yarn test')
+  spinner.succeed()
 
   // git configuration
   const gitExists = await filesystem.exists('./.git')
   if (!gitExists && !parameters.options['skip-git'] && system.which('git')) {
     // initial git
-    const spinner = print.spin('configuring git')
+    spinner = print.spin('configuring git')
 
-    system.run(`git init`)
+    await system.run(`git init`)
+    await system.run(`git add -A`)
+    await system.run(`git commit -m "Initial commit"`)
 
-    spinner.succeed(`configured git`)
+    spinner.succeed()
   }
 
   const perfDuration = parseInt(((new Date()).getTime() - perfStart) / 10) / 100
-  spinner.succeed(`ignited ${yellow(name)} in ${perfDuration}s`)
+  print.info(`ignited ${yellow(name)} in ${perfDuration}s`)
 
-  const successMessage = `
+  print.info(`
     ${red('Ignite CLI')} ignited ${yellow(name)} in ${gray(`${perfDuration}s`)}
 
     Next steps:
 
-      ☐ Run: react-native link
       ☐ Setup Fastlane and Match for iOS
       ☐ Setup Android signing
       ☐ Setup Fastlane for Android
       ☐ ${bold('Get coding!')}
-  `
-
-  print.info(successMessage)
+  `)
 }
 
 module.exports = {
