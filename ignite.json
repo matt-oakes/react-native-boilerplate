@@ -1,6 +1,7 @@
 {
   "generators": [
     "component",
+    "saga",
     "screen"
   ]
 }
