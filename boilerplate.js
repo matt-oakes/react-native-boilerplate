@@ -75,6 +75,7 @@ async function install (context) {
     { template: 'Gemfile', target: 'Gemfile' },
     { template: 'jest-setup.js', target: 'jest-setup.js' },
     { template: '.flowconfig', target: '.flowconfig' },
+    { template: 'rn-cli-config.js', target: 'rn-cli-config.js' },
     { template: 'scripts/internal-release.py.ejs', target: 'scripts/internal-release.py' },
     { template: 'storybook/storybook.js.ejs', target: 'storybook/storybook.js' }
   ]
