@@ -5,7 +5,7 @@ This is the boilerplate that [Matt Oakes](https://mattoakes.net) uses as a way t
 Currently includes:
 
 **App Foundations**
-* `react-native@0.50.4` - The cross platform foundations of the app.
+* `react-native@0.52.0` - The cross platform foundations of the app.
 * `react-navigation` - Handle navigation with integration with redux.
 * `react-native-i18n` - Allows strings to be localised.
 * `redux` - The main state management framework.
