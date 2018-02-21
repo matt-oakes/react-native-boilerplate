@@ -153,7 +153,6 @@ import React from "react";
 import { storiesOf } from "@storybook/react-native";
 
 import { """ + missing_screen_story + """Screen } from "~/src/screens/""" + missing_screen_story + """";
-import CenterView from "~/storybook/decorators/CenterView";
 
 storiesOf(\"Screen: """ + missing_screen_story + """\", module)
   .add("Default", () =>
