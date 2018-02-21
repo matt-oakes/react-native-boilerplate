@@ -31,7 +31,7 @@ async function install (context) {
 
   const name = parameters.third
   let spinner = print
-    .spin(`using Matt Oakes's React Native boilerplate`)
+    .spin(`using Matt Oakes' React Native boilerplate`)
     .succeed()
 
   // attempt to install React Native or die trying
@@ -135,10 +135,6 @@ async function install (context) {
   }
   await mergePackageJsons()
   spinner.succeed()
-
-  spinner = print.spin('running yarn install')
-  await system.run('yarn install')
-  spinner.succeed()
   
   try {
     // boilerplate adds itself to get plugin.js/generators etc
@@ -155,7 +151,10 @@ async function install (context) {
   
   spinner = print.spin('enabling postinstall')
   await system.run('sed -i "" "s/disabled-postinstall/postinstall/g" package.json')
-  await system.run('yarn postinstall')
+  spinner.succeed()
+
+  spinner = print.spin('running yarn install')
+  await system.run('yarn install')
   spinner.succeed()
 
   // react native link -- must use spawn & stdio: ignore or it hangs!! :(
@@ -175,11 +174,11 @@ async function install (context) {
 
   // Set the bundle id and app name correctly
   spinner = print.spin('setting the bundle id and display name')
-  await system.run(`yarn update-bundle-id "${bundleId}" "${displayName}"`)
+  await system.run(`yarn update:bundle-id "${bundleId}" "${displayName}"`)
   spinner.succeed()
 
   spinner = print.spin('setting the initial version number to 0.1.0')
-  await system.run(`yarn set-version 0 1 0`)
+  await system.run(`yarn update:version 0 1 0`)
   spinner.succeed()
 
   spinner = print.spin(`running tests`)
