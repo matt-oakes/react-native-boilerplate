@@ -41,7 +41,8 @@ async function install (context) {
   })
   if (rnInstall.exitCode > 0) process.exit(rnInstall.exitCode)
 
-  // remove the __tests__ directory that comes with React Native
+  // remove the App.js and __tests__ directory that comes with React Native
+  filesystem.remove('App.js')
   filesystem.remove('__tests__')
 
   // copy our App & Tests directories
