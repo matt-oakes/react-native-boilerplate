@@ -12,6 +12,7 @@ import middleware from "./middleware";
 import rootReducer from "./reducers";
 import RootSaga from "../sagas";
 import type { StoreType } from "./types";
+import devMachineHostname from "../lib/devMachineHostname";
 
 export { initialState } from "./reducers";
 
@@ -30,7 +31,7 @@ const reactNavigationMiddleware = createReactNavigationReduxMiddleware(
 );
 
 const composeEnhansers = composeWithDevTools({
-  hostname: "localhost",
+  hostname: devMachineHostname,
   port: 8000
 });
 const store: StoreType = createStore(
