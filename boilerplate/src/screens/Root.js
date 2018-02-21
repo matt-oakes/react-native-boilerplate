@@ -3,8 +3,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import type { Connector } from "react-redux";
-import { addNavigationHelpers } from "react-navigation";
-import type { NavigationState } from "react-navigation";
+import { addNavigationHelpers, type NavigationState } from "react-navigation";
+import { createReduxBoundAddListener } from 'react-navigation-redux-helpers';
 
 import Navigator from "~/src/navigation/rootNavigationStack";
 import type { DispatchType, StateType } from "~/src/redux/types";
@@ -20,7 +20,8 @@ export function RootScreen({ navigationState, dispatch}: Props) {
   <Navigator
     navigation={addNavigationHelpers({
       dispatch: dispatch,
-      state: navigationState
+      state: navigationState,
+      addListener: createReduxBoundAddListener("root")
     })}
   />
   );
