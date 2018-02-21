@@ -2,6 +2,8 @@
 
 This is the boilerplate that [Matt Oakes](https://mattoakes.net) uses as a way to bring up new React Native projects.
 
+**I do not recommend using this boilerplate for your own projects. Is it mainly for my own personal use and is not likely to meet your needs or be kept up-to-date. I recommend that you use one of the [official Ignite boilerplates](https://github.com/infinitered/ignite/blob/master/BOILERPLATES.md) instead.**
+
 Currently includes:
 
 **App Foundations**
