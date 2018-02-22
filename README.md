@@ -19,6 +19,7 @@ Currently includes:
 * `husky` - Runs code styling on commit and the tests on push to avoid errors being missed.
 * `flow` - Adds type checking to the application.
 * `prettier` - Automatically sets the code style.
+* `eslint` - Lint checking the application and running prettier.
 * `jest` - Main testing framework with mocking, spies, and expectations built-in.
 * `storybook` - Component test cases with snapshot testing using storyshots.
 * `remote-redux-devtools` - Allow inspecting and time travel for the redux state.
