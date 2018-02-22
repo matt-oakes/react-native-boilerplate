@@ -36,5 +36,5 @@ export default {
   tiny: {
     ...base,
     fontSize: 11
-  },
+  }
 };

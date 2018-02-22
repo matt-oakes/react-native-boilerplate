@@ -4,7 +4,6 @@
 import UIActions from "../actions";
 import reducer, { initialState as uiInitialState } from "../reducers";
 import type { UIStateType } from "../types";
-import { Actions } from "../../types";
 import type { ActionType } from "../../types";
 
 describe("UI reducer", () => {
@@ -16,7 +15,7 @@ describe("UI reducer", () => {
     const testAppLoad = (
       previousAppLoaded: boolean,
       action: ActionType,
-      expectedAppLoaded: boolean,
+      expectedAppLoaded: boolean
     ) => {
       const startState: UIStateType = {
         ...uiInitialState,

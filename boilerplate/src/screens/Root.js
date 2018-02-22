@@ -8,7 +8,7 @@ import {
   NavigationActions as ReactNavigationActions,
   type NavigationState
 } from "react-navigation";
-import { createReduxBoundAddListener } from 'react-navigation-redux-helpers';
+import { createReduxBoundAddListener } from "react-navigation-redux-helpers";
 
 import Navigator from "~/src/navigation/rootNavigationStack";
 import type { DispatchType, StateType } from "~/src/redux/types";
@@ -39,7 +39,7 @@ export class RootScreen extends React.PureComponent<Props> {
   };
 
   render() {
-    const { navigationState, dispatch} = this.props;
+    const { navigationState, dispatch } = this.props;
     return (
       <Navigator
         navigation={addNavigationHelpers({

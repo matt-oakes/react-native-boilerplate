@@ -1,14 +1,12 @@
 // @flow
 
 import _ from "lodash";
-import { NavigationActions } from "react-navigation";
 
-import { RequestKey, RequestKeyActionMap } from "./config";
+import { RequestKeyActionMap } from "./config";
 import type { RequestKeyType } from "./config";
 import { Actions as NetworkActions } from "./types";
-import type { NetworkStateType, RequestHashKeyType } from "./types";
+import type { NetworkStateType } from "./types";
 import { createRequestHashKey } from "./utils";
-import { Actions } from "../types";
 import type { ActionType } from "../types";
 import { APIError } from "~/src/models/apiError";
 

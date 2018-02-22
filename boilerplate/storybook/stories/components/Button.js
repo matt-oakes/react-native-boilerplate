@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable react-native/no-inline-styles */
 
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
@@ -8,23 +9,19 @@ import Button from "~/src/components/Button";
 import CenterView from "~/storybook/decorators/CenterView";
 
 storiesOf("Button", module)
-  .addDecorator(getStory =>
-    <CenterView dark>
-      {getStory()}
-    </CenterView>
-  )
-  .add("Default", () =>
+  .addDecorator(getStory => <CenterView dark>{getStory()}</CenterView>)
+  .add("Default", () => (
     <Button
       onPress={action("clicked")}
       style={{ backgroundColor: "#000000" }}
       text="Black Button"
     />
-  )
-  .add("Disabled", () =>
+  ))
+  .add("Disabled", () => (
     <Button
       onPress={action("clicked")}
       style={{ backgroundColor: "#000000" }}
       disabled
       text="Diabled Button"
     />
-  );
+  ));

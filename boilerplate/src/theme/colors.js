@@ -13,5 +13,5 @@ export default {
 
   overlay: "rgba(0, 0, 0, 0.66)",
 
-  highlightBackground: "#CCCCCC",
+  highlightBackground: "#CCCCCC"
 };

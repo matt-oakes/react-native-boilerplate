@@ -2,6 +2,6 @@
 
 export default {
   api: {
-    url: "https://example.com",
+    url: "https://example.com"
   }
 };

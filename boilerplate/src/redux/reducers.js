@@ -5,7 +5,7 @@ import { combineReducers } from "redux";
 import navigation, { NavigationInitialState } from "./navigation";
 import network, { NetworkInitialState } from "./network";
 import ui, { UIInitialState } from "./ui";
-import type { ActionType, StateType } from "./types";
+import type { StateType } from "./types";
 
 /**
  * Default redux store state

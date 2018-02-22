@@ -1,6 +1,9 @@
 // @flow
 
-import type { Store as ReduxStore, Dispatch as ReduxDispatch } from "redux";
+import {
+  type Store as ReduxStore, //eslint-disable-line import/named
+  type Dispatch as ReduxDispatch //eslint-disable-line import/named
+} from "redux";
 
 import NavigationTypes from "./navigation/types";
 import type { NavigationStateType } from "./navigation/types";
@@ -20,10 +23,7 @@ export const Actions = {
 };
 export type ActionNameType = $Keys<typeof Actions>;
 
-export type ActionType =
-  | NetworkActionType
-  | UIActionType
-  | { type: "noop" };
+export type ActionType = NetworkActionType | UIActionType | { type: "noop" };
 
 /**
  * Redux store state

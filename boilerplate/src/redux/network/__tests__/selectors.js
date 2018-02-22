@@ -3,7 +3,7 @@
 
 import _ from "lodash";
 
-import { RequestKey, RequestKeyActionMap } from "../config";
+import { RequestKeyActionMap } from "../config";
 import NetworkSelectors from "../selectors";
 import { initialState as networkInitialState } from "../reducers";
 import type { NetworkStateType } from "../types";

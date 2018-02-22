@@ -1,6 +1,5 @@
 // @flow
 import parse from "date-fns/parse";
-import format from "date-fns/format";
 
 // Just regular function compose, is particularly useful with converters
 export function compose<A, B, C>(a: (_: B) => A, b: (_: C) => B): (_: C) => A {
@@ -85,7 +84,9 @@ export function timestamp(d: mixed): string {
   if (nearlyMatch) {
     s = `${nearlyMatch[1]}T${nearlyMatch[2]}${nearlyMatch[3]}`;
   }
-  return parse(s).toISOString().replace(/[.]\d+Z$/, "Z");
+  return parse(s)
+    .toISOString()
+    .replace(/[.]\d+Z$/, "Z");
 }
 
 function pad(s, n = 2) {
@@ -101,7 +102,7 @@ export function time(d: mixed): string {
   const s = string(d);
   const matched = /^(\d\d):(\d\d)(:\d\d)?$/.exec(s);
   if (!matched) throw new ConverterError("Time must be HH:MM");
-  let [_ignore, h, m] = matched;
+  let [, h, m] = matched;
   h = parseInt(h);
   m = parseInt(m);
   if (h < 0 || h > 23)
@@ -140,7 +141,7 @@ export function defaultValue<T>(
 
 // For when you just want to supply a fixed value (for composing with other things)
 export function value<T>(v: T): Converter<T> {
-  return d => v;
+  return () => v;
 }
 
 // An array of values

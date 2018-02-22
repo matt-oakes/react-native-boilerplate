@@ -1,11 +1,11 @@
-/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
+// @flow
 
-import React, { PropTypes } from "react";
+import * as React from "react";
 import { StyleSheet, View } from "react-native";
 
 type Props = {
   dark?: boolean,
-  children?: PropTypes.node
+  children?: React.Node
 };
 
 export default function CenterView(props: Props) {

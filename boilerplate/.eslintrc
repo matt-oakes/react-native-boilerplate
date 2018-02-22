@@ -1,0 +1,40 @@
+{
+  "extends": [
+    "plugin:prettier/recommended",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-native/all",
+    "plugin:import/errors",
+    "plugin:flowtype/recommended"
+  ],
+  "plugins": [
+    "react",
+    "react-native",
+    "flowtype",
+    "import"
+  ],
+  "rules": {
+    "react-native/no-color-literals": 0,
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "index", "sibling", "parent" ]
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-plugin-root-import": {}
+    }
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "env": {
+    "react-native/react-native": true
+  }
+}

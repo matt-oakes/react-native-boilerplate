@@ -10,8 +10,9 @@ import { createReactNavigationReduxMiddleware } from "react-navigation-redux-hel
 import migrations from "./migrations";
 import middleware from "./middleware";
 import rootReducer from "./reducers";
-import RootSaga from "../sagas";
 import type { StoreType } from "./types";
+
+import RootSaga from "../sagas";
 import devMachineHostname from "../lib/devMachineHostname";
 
 export { initialState } from "./reducers";

@@ -2,7 +2,6 @@
 // @flow
 
 import UISelectors from "../selectors";
-import type { UIStateType } from "../types";
 import { initialState as uiInitialState } from "../reducers";
 import { initialState } from "~/src/redux";
 

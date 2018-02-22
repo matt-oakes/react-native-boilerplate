@@ -16,7 +16,7 @@ export function APIError(
   code: number = -1,
   title: ?string = null,
   detail: APIErrorDetailType = {}
-// $FlowExpectedError Needed to force this to be of type "Error"
+  // $FlowExpectedError Needed to force this to be of type "Error"
 ): Error {
   this.code = code;
   this.title = title || I18n.t("error.unknown");

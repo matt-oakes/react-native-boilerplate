@@ -77,6 +77,7 @@ async function install (context) {
     { template: 'README.md.ejs', target: 'README.md' },
     { template: 'gitignore', target: '.gitignore' },
     { template: '.babelrc', target: '.babelrc' },
+    { template: '.eslintrc', target: '.eslintrc' },
     { template: 'Gemfile', target: 'Gemfile' },
     { template: 'jest-setup.js', target: 'jest-setup.js' },
     { template: '.flowconfig', target: '.flowconfig' },

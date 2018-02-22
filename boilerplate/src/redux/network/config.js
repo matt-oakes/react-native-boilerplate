@@ -1,6 +1,5 @@
 // @flow
 
-import { Actions } from "../types";
 import type { RequestKeyActionMapType } from "./types";
 
 // The request keys used to reference the types of network requests

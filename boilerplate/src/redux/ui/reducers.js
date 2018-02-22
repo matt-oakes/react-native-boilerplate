@@ -1,7 +1,7 @@
 // @flow
 
-import { Actions } from "../types";
 import type { UIStateType } from "./types";
+import { Actions } from "../types";
 import type { ActionType } from "../types";
 
 export const initialState: UIStateType = {
@@ -17,7 +17,7 @@ export default function reducer(
       return {
         ...state,
         appLoaded: true
-      }
+      };
     default:
       return state;
   }

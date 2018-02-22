@@ -1,4 +1,6 @@
 // @flow
+/* eslint-env jest */
+
 import "..";
 
 jest.mock("react-native", () => ({
@@ -9,7 +11,7 @@ jest.mock("react-native", () => ({
   }
 }));
 
-import I18n from "react-native-i18n";
+import I18n from "react-native-i18n"; // eslint-disable-line no-unused-vars
 
 // This test file is mostly just to check that the i18n imports without crashing
 test("Should have translations", () => {});

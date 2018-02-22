@@ -19,8 +19,7 @@ export const Actions = {
 };
 
 // It would be lovely if Flow let you use the const above as a string literal instead of duplicating it, but it doesn't...
-export type UIActionType =
-  | {| type: "ui/app_loaded" |};
+export type UIActionType = {| type: "ui/app_loaded" |};
 
 /**
  * Export it all
