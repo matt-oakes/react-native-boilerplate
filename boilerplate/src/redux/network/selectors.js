@@ -25,6 +25,7 @@ const getError = (state: StateType) => {
 const getErrorTitle = createSelector(getError, getErrorFunction => {
   return (requestKey: RequestKeyType, requestId: RequestIdType = "") => {
     const error = getErrorFunction(requestKey, requestId);
+    // $FlowExpectedError
     return error && error.title ? error.title : null;
   };
 });

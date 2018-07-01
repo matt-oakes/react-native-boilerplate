@@ -10,7 +10,6 @@ import {
   TouchableHighlight,
   View
 } from "react-native";
-import type { StyleObj } from "react-native/Libraries/StyleSheet/StyleSheetTypes";
 import type { ImageSource } from "react-native/Libraries/Image/ImageSource";
 
 export type Props = {
@@ -22,9 +21,9 @@ export type Props = {
   onPress?: ?Function,
   textColor?: ColorPropType,
   textSize?: ?number,
-  defaultStyle?: StyleObj,
-  style?: StyleObj,
-  containerStyle?: StyleObj,
+  defaultStyle?: any,
+  style?: any,
+  containerStyle?: any,
   testID?: string
 };
 

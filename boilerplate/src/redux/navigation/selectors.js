@@ -4,7 +4,7 @@ import { createSelector } from "reselect";
 
 import type { StateType } from "../types";
 
-export const getNavigationState = (state: StateType) => state.navigation;
+export const getNavigationState = (state: StateType) => state.navigation.state;
 
 const getCurrentRouteInternal = state => {
   if (!state) {

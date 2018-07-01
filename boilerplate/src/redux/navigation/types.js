@@ -2,7 +2,9 @@
 
 import type { NavigationState } from "react-navigation";
 
-export type NavigationStateType = NavigationState;
+export type NavigationStateType = {
+  state: NavigationState
+};
 
 /**
  * Redux action types

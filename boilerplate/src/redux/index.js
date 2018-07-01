@@ -1,7 +1,6 @@
 // @flow
 
-import { applyMiddleware, createStore } from "redux";
-import { composeWithDevTools } from "remote-redux-devtools";
+import { applyMiddleware, createStore, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { persistStore, persistReducer, createMigrate } from "redux-persist";
 import PersistStorage from "redux-persist/lib/storage";
@@ -13,7 +12,6 @@ import rootReducer from "./reducers";
 import type { StoreType } from "./types";
 
 import RootSaga from "../sagas";
-import devMachineHostname from "../lib/devMachineHostname";
 
 export { initialState } from "./reducers";
 
@@ -28,16 +26,17 @@ const appReducer = persistReducer(persistConfig, rootReducer);
 const sagaMiddleware = createSagaMiddleware();
 const reactNavigationMiddleware = createReactNavigationReduxMiddleware(
   "root",
-  state => state.navigation
+  state => state.navigation.state
 );
 
-const composeEnhansers = composeWithDevTools({
-  hostname: devMachineHostname,
-  port: 8000
-});
+const composeEnhancers =
+  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : compose;
+// $FlowFixMe
 const store: StoreType = createStore(
   appReducer,
-  composeEnhansers(
+  composeEnhancers(
     applyMiddleware(...middleware, reactNavigationMiddleware, sagaMiddleware)
   )
 );

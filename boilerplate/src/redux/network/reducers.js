@@ -102,6 +102,7 @@ export default function reducer(
   const setsErrorRequestKey = SetsErrorActions[action.type];
   if (setsErrorRequestKey) {
     const requestHashKey = getRequestHashKey(setsErrorRequestKey, action);
+    // $FlowExpectedError
     const error = action.error ? action.error : new APIError();
     newState = {
       ...newState,
